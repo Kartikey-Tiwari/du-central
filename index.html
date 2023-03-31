@@ -30,182 +30,195 @@
         </nav>
       </div>
       <div class="flex">
-        <input id="subject-search" type="search" placeholder="Search Subject" />
-        <span id="clear-search-input">
-          <svg
-            fill="#000000"
-            height="12px"
-            width="12px"
-            version="1.1"
-            id="Capa_1"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            viewBox="0 0 460.775 460.775"
-            xml:space="preserve"
-          >
-            <path
-              d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55
+        <form class="form">
+          <input name="subject" type="search" placeholder="Search Subject" />
+          <span class="clear-search-input">
+            <svg
+              fill="#000000"
+              height="12px"
+              width="12px"
+              version="1.1"
+              id="Capa_1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              viewBox="0 0 460.775 460.775"
+              xml:space="preserve"
+            >
+              <path
+                d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55
 	c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55
 	c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505
 	c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55
 	l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719
 	c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z"
-            />
-          </svg>
-        </span>
+              />
+            </svg>
+          </span>
+        </form>
       </div>
     </header>
     <main>
       <section class="hero-section">
-        <div class="logo-containe">
-          <h1 class="logo logo-big">DU Central</h1>
-          <span class="tagline">The Ultimate Destination For Delhi University Students</span>
+        <div>
+          <div class="logo-container">
+            <h1 class="logo logo-big">DU Central</h1>
+            <span class="tagline"
+              >The Ultimate Destination For Delhi University Students</span
+            >
+          </div>
+          <form class="form">
+            <input
+              class="hero-input"
+              name="subject"
+              type="search"
+              placeholder="Search Subject"
+            />
+          </form>
         </div>
-        <form>
-          <input type="search">
-        </form>
       </section>
-      <section class="main-container">
-        <section id="recent">
-          <div class="flex section-header">
-            <svg
-              fill="#000000"
-              height="20px"
-              width="20px"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 237.783 237.783"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-              enable-background="new 0 0 237.783 237.783"
-            >
-              <g>
-                <path
-                  d="m42.735,50.071h96.959c3.313,0 6,2.687 6,6s-2.687,6-6,6h-96.959c-3.313,0-6-2.687-6-6s2.686-6 6-6zm0,25.934h96.959c3.313,0 6,2.687 6,6s-2.687,6-6,6h-96.959c-3.313,0-6-2.687-6-6s2.686-6 6-6zm0,25.935h96.959c3.313,0 6,2.687 6,6s-2.687,6-6,6h-96.959c-3.313,0-6-2.687-6-6s2.686-6 6-6zm0,25.935h96.959c3.313,0 6,2.687 6,6s-2.687,6-6,6h-96.959c-3.313,0-6-2.687-6-6s2.686-6 6-6z"
-                />
-                <path
-                  d="m42.735,62.071h96.959c3.313,0 6-2.687 6-6s-2.687-6-6-6h-96.959c-3.313,0-6,2.687-6,6s2.686,6 6,6z"
-                />
-                <path
-                  d="m42.735,88.005h96.959c3.313,0 6-2.687 6-6s-2.687-6-6-6h-96.959c-3.313,0-6,2.687-6,6s2.686,6 6,6z"
-                />
-                <path
-                  d="m42.735,113.94h96.959c3.313,0 6-2.687 6-6s-2.687-6-6-6h-96.959c-3.313,0-6,2.687-6,6s2.686,6 6,6z"
-                />
-                <path
-                  d="m42.735,139.875h96.959c3.313,0 6-2.687 6-6s-2.687-6-6-6h-96.959c-3.313,0-6,2.687-6,6s2.686,6 6,6z"
-                />
-                <path
-                  d="m237.783,98.361c0-1.591-0.632-3.117-1.757-4.243l-16.356-16.355c-1.125-1.125-2.651-1.757-4.243-1.757s-3.117,0.632-4.243,1.757l-28.756,28.756v-88.117c0-3.313-2.686-6-6-6h-170.428c-3.314,0-6,2.687-6,6v200.979c0,3.313 2.686,6 6,6h170.429c3.314,0 6-2.687 6-6v-63.18l53.597-53.597c1.125-1.125 1.757-2.651 1.757-4.243zm-225.783,115.02v-188.979h158.429v94.117l-35.291,35.291h-92.403c-3.313,0-6,2.687-6,6s2.687,6 6,6h80.403l-1.033,1.033c-0.777,0.777-1.326,1.753-1.586,2.821l-4.157,17.05h-25.148c-3.313,0-6,2.687-6,6s2.687,6 6,6c0,0 29.714,0 29.86,0 0.473,0 0.95-0.056 1.421-0.171l21.629-5.273c1.068-0.26 2.044-0.809 2.821-1.586l23.482-23.482v45.181h-158.427zm127.649-31.374l-10.408,2.538 2.538-10.408 83.648-83.648 7.871,7.871-83.649,83.647z"
-                />
-              </g>
-            </svg>
-            <h2>Recently Uploaded</h2>
-          </div>
-          <ul class="list-links flex">
-            <li>
-              <a class="file-link"
-                >Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa,
-                hic!</a
-              >
-              <a class="subject-link">subject name</a>
-              <a class="uploader-link">by jdfalk</a>
-            </li>
-            <li>
-              <a
-                >Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Veniam, vero!</a
-              >
-              <span>by jlaf</span>
-            </li>
-            <li>
-              <a
-                >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim,
-                corporis?</a
-              >
-              <span>by jadfa</span>
-            </li>
-          </ul>
-        </section>
-        <section id="most-viewed">
-          <div class="flex section-header">
-            <svg
-              width="20px"
-              height="20px"
-              viewBox="0 0 1024 1024"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
+      <section class="links-section">
+        <div class="main-container">
+          <section id="recent">
+            <div class="flex section-header">
+              <svg
                 fill="#000000"
-                d="M512 160c320 0 512 352 512 352S832 864 512 864 0 512 0 512s192-352 512-352zm0 64c-225.28 0-384.128 208.064-436.8 288 52.608 79.872 211.456 288 436.8 288 225.28 0 384.128-208.064 436.8-288-52.608-79.872-211.456-288-436.8-288zm0 64a224 224 0 1 1 0 448 224 224 0 0 1 0-448zm0 64a160.192 160.192 0 0 0-160 160c0 88.192 71.744 160 160 160s160-71.808 160-160-71.744-160-160-160z"
-              />
-            </svg>
-            <h2>Most Viewed</h2>
-          </div>
-          <ul class="list-links flex">
-            <li>
-              <a
-                >Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Ipsum, sit.</a
+                height="20px"
+                width="20px"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 237.783 237.783"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                enable-background="new 0 0 237.783 237.783"
               >
-              <span>by aldf</span>
-            </li>
-            <li>
-              <a
-                >Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Nostrum, fugiat.</a
+                <g>
+                  <path
+                    d="m42.735,50.071h96.959c3.313,0 6,2.687 6,6s-2.687,6-6,6h-96.959c-3.313,0-6-2.687-6-6s2.686-6 6-6zm0,25.934h96.959c3.313,0 6,2.687 6,6s-2.687,6-6,6h-96.959c-3.313,0-6-2.687-6-6s2.686-6 6-6zm0,25.935h96.959c3.313,0 6,2.687 6,6s-2.687,6-6,6h-96.959c-3.313,0-6-2.687-6-6s2.686-6 6-6zm0,25.935h96.959c3.313,0 6,2.687 6,6s-2.687,6-6,6h-96.959c-3.313,0-6-2.687-6-6s2.686-6 6-6z"
+                  />
+                  <path
+                    d="m42.735,62.071h96.959c3.313,0 6-2.687 6-6s-2.687-6-6-6h-96.959c-3.313,0-6,2.687-6,6s2.686,6 6,6z"
+                  />
+                  <path
+                    d="m42.735,88.005h96.959c3.313,0 6-2.687 6-6s-2.687-6-6-6h-96.959c-3.313,0-6,2.687-6,6s2.686,6 6,6z"
+                  />
+                  <path
+                    d="m42.735,113.94h96.959c3.313,0 6-2.687 6-6s-2.687-6-6-6h-96.959c-3.313,0-6,2.687-6,6s2.686,6 6,6z"
+                  />
+                  <path
+                    d="m42.735,139.875h96.959c3.313,0 6-2.687 6-6s-2.687-6-6-6h-96.959c-3.313,0-6,2.687-6,6s2.686,6 6,6z"
+                  />
+                  <path
+                    d="m237.783,98.361c0-1.591-0.632-3.117-1.757-4.243l-16.356-16.355c-1.125-1.125-2.651-1.757-4.243-1.757s-3.117,0.632-4.243,1.757l-28.756,28.756v-88.117c0-3.313-2.686-6-6-6h-170.428c-3.314,0-6,2.687-6,6v200.979c0,3.313 2.686,6 6,6h170.429c3.314,0 6-2.687 6-6v-63.18l53.597-53.597c1.125-1.125 1.757-2.651 1.757-4.243zm-225.783,115.02v-188.979h158.429v94.117l-35.291,35.291h-92.403c-3.313,0-6,2.687-6,6s2.687,6 6,6h80.403l-1.033,1.033c-0.777,0.777-1.326,1.753-1.586,2.821l-4.157,17.05h-25.148c-3.313,0-6,2.687-6,6s2.687,6 6,6c0,0 29.714,0 29.86,0 0.473,0 0.95-0.056 1.421-0.171l21.629-5.273c1.068-0.26 2.044-0.809 2.821-1.586l23.482-23.482v45.181h-158.427zm127.649-31.374l-10.408,2.538 2.538-10.408 83.648-83.648 7.871,7.871-83.649,83.647z"
+                  />
+                </g>
+              </svg>
+              <h2>Recently Uploaded</h2>
+            </div>
+            <ul class="list-links flex">
+              <li>
+                <a class="file-link"
+                  >Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Ipsa, hic!</a
+                >
+                <a class="subject-link">subject name</a>
+                <a class="uploader-link">by jdfalk</a>
+              </li>
+              <li>
+                <a
+                  >Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  Veniam, vero!</a
+                >
+                <span>by jlaf</span>
+              </li>
+              <li>
+                <a
+                  >Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                  Enim, corporis?</a
+                >
+                <span>by jadfa</span>
+              </li>
+            </ul>
+          </section>
+          <section id="most-viewed">
+            <div class="flex section-header">
+              <svg
+                width="20px"
+                height="20px"
+                viewBox="0 0 1024 1024"
+                xmlns="http://www.w3.org/2000/svg"
               >
-              <span>by jfladskj</span>
-            </li>
-            <li>
-              <a
-                >Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Facere, nobis!</a
-              >
-              <span>by aafdla</span>
-            </li>
-          </ul>
-        </section>
-        <section id="top-voted">
-          <div class="flex section-header">
-            <svg
-              fill="#000000"
-              width="20px"
-              height="20px"
-              viewBox="0 0 16 16"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g>
                 <path
-                  d="M1,15h1.8V6H1Zm12.6-9.38H10L10.64,4a3.31,3.31,0,0,0,.21-1.76A2.72,2.72,0,0,0,10.21.87,2.77,2.77,0,0,0,9.54.31,1.17,1.17,0,0,0,8.65,0,1,1,0,0,0,8,.66c-.11.29-.22.59-.34.88l-.57,1.4L4,6v9h7.11a1.82,1.82,0,0,0,1.61-1l1.94-3.68A3,3,0,0,0,15,8.94V7.07A1.42,1.42,0,0,0,13.61,5.62Zm0,3.32a1.58,1.58,0,0,1-.18.73l-1.93,3.68a.46.46,0,0,1-.38.25H5.4v-7L8.07,3.93a1.37,1.37,0,0,0,.3-.45c.13-.29.44-1,.72-1.76a1.46,1.46,0,0,1,.26,1.7L8,7l5.6.05Z"
+                  fill="#000000"
+                  d="M512 160c320 0 512 352 512 352S832 864 512 864 0 512 0 512s192-352 512-352zm0 64c-225.28 0-384.128 208.064-436.8 288 52.608 79.872 211.456 288 436.8 288 225.28 0 384.128-208.064 436.8-288-52.608-79.872-211.456-288-436.8-288zm0 64a224 224 0 1 1 0 448 224 224 0 0 1 0-448zm0 64a160.192 160.192 0 0 0-160 160c0 88.192 71.744 160 160 160s160-71.808 160-160-71.744-160-160-160z"
                 />
-              </g>
-            </svg>
-            <h2>Top Voted</h2>
-          </div>
-          <ul class="list-links flex">
-            <li>
-              <a
-                >Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Officia, beatae!</a
+              </svg>
+              <h2>Most Viewed</h2>
+            </div>
+            <ul class="list-links flex">
+              <li>
+                <a
+                  >Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                  Ipsum, sit.</a
+                >
+                <span>by aldf</span>
+              </li>
+              <li>
+                <a
+                  >Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  Nostrum, fugiat.</a
+                >
+                <span>by jfladskj</span>
+              </li>
+              <li>
+                <a
+                  >Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Facere, nobis!</a
+                >
+                <span>by aafdla</span>
+              </li>
+            </ul>
+          </section>
+          <section id="top-voted">
+            <div class="flex section-header">
+              <svg
+                fill="#000000"
+                width="20px"
+                height="20px"
+                viewBox="0 0 16 16"
+                xmlns="http://www.w3.org/2000/svg"
               >
-              <span>by ald</span>
-            </li>
-            <li>
-              <a
-                >Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Voluptas, asperiores.</a
-              >
-              <span>by lafdj</span>
-            </li>
-            <li>
-              <a
-                >Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias,
-                odio?</a
-              >
-              <span>by alfd</span>
-            </li>
-          </ul>
-        </section>
+                <g>
+                  <path
+                    d="M1,15h1.8V6H1Zm12.6-9.38H10L10.64,4a3.31,3.31,0,0,0,.21-1.76A2.72,2.72,0,0,0,10.21.87,2.77,2.77,0,0,0,9.54.31,1.17,1.17,0,0,0,8.65,0,1,1,0,0,0,8,.66c-.11.29-.22.59-.34.88l-.57,1.4L4,6v9h7.11a1.82,1.82,0,0,0,1.61-1l1.94-3.68A3,3,0,0,0,15,8.94V7.07A1.42,1.42,0,0,0,13.61,5.62Zm0,3.32a1.58,1.58,0,0,1-.18.73l-1.93,3.68a.46.46,0,0,1-.38.25H5.4v-7L8.07,3.93a1.37,1.37,0,0,0,.3-.45c.13-.29.44-1,.72-1.76a1.46,1.46,0,0,1,.26,1.7L8,7l5.6.05Z"
+                  />
+                </g>
+              </svg>
+              <h2>Top Voted</h2>
+            </div>
+            <ul class="list-links flex">
+              <li>
+                <a
+                  >Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Officia, beatae!</a
+                >
+                <span>by ald</span>
+              </li>
+              <li>
+                <a
+                  >Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                  Voluptas, asperiores.</a
+                >
+                <span>by lafdj</span>
+              </li>
+              <li>
+                <a
+                  >Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Alias, odio?</a
+                >
+                <span>by alfd</span>
+              </li>
+            </ul>
+          </section>
+        </div>
       </section>
     </main>
   </body>
