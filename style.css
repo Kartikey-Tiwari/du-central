@@ -17,18 +17,56 @@ header {
   color: white;
 }
 
+.flex {
+  display: flex;
+}
+
 header,
 header ul,
-header > div {
-  display: flex;
+header > div,
+.main-container section .flex {
   align-items: center;
 }
 
-#logo {
+.hero-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  text-decoration: none;
   border: 2px solid white;
   padding: 5px;
   font-size: 1.5rem;
-  font-weight: bold;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+}
+
+.logo-big {
+  font-size: 4rem;
+  color: #652b7c;
+  border: 4px solid #652b7c;
+  border-bottom: none;
+  text-align: center;
+}
+
+.tagline {
+  color: white;
+  font-size: 0.9rem;
+  background-color: #652b7c;
+  font-weight: 500;
+  padding: 5px;
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo:active {
+  color: rgba(255, 255, 255, 0.8);
 }
 
 header > div,
@@ -41,8 +79,16 @@ header ul a {
   color: white;
 }
 
+header ul a:focus {
+  transform: scale(0.9);
+}
+
 header ul a:hover {
   color: rgba(255, 255, 255, 0.7);
+}
+
+header ul li:active {
+  transform: scale(0.9);
 }
 
 header input {
@@ -72,4 +118,77 @@ header > div:last-child > span {
   right: 6px;
   top: 4px;
   display: none;
+}
+
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+main > section {
+  min-height: 90vh;
+}
+
+.main-container {
+  width: min(1100px, 90vw);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.section-header {
+  border-bottom: 1px solid black;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  gap: 10px;
+}
+
+.list-links {
+  flex-direction: column;
+}
+
+.list-links li {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 5px;
+}
+
+.list-links li:hover {
+  box-shadow: 5px 2px 10px rgb(0,0,0,0.2);
+  transform: translateY(-5px);
+}
+
+.list-links li a {
+  cursor: pointer;
+}
+
+.file-link,
+.subject-link {
+  color: #454e81;
+  font-weight: 500;
+}
+
+.subject-link {
+  font-size: 0.95rem;
+}
+
+.uploader-link {
+  font-size: 0.9rem;
+}
+
+.file-link:hover,
+.subject-link:hover,
+.uploader-link:hover {
+  text-decoration: underline;
+  color: rgb(0 139 139);
+}
+
+.uploader-link {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.uploader-link:hover {
+  color: rgba(0, 0, 0, 0.9);
 }
