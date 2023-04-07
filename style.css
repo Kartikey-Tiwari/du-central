@@ -145,6 +145,10 @@ main {
   min-height: 90vh;
 }
 
+main > h2 {
+  margin-bottom: 10px;
+}
+
 main > section {
   min-height: 90vh;
 }
@@ -271,7 +275,7 @@ main > section {
 
 .upload-form {
   flex-direction: column;
-  gap: 5px;
+  gap: 8px;
   width: min(90vw, 400px);
 }
 
@@ -295,4 +299,81 @@ button {
 
 .upload-form div:last-of-type {
   font-size: 0.9rem;
+}
+
+.input-text-container {
+  position: relative;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.input-text-container label {
+  position: absolute;
+  z-index: 1;
+  top: 6px;
+  left: 5px;
+  color: grey;
+  transition: all 0.1s ease-in-out;
+}
+
+.input-text-container input {
+  outline: none;
+  transition: all 0.1s ease-in-out;
+}
+
+.input-text-container input.active {
+  border: 1px solid blue;
+}
+
+select {
+  outline: none;
+}
+
+.valid {
+  border: 1px solid green !important;
+}
+
+.invalid {
+  border: 1px solid red !important;
+}
+
+.disabled {
+  border: 1px solid grey;
+  color: grey;
+}
+
+.input-text-container input:focus ~ label,
+.input-text-container .has-text {
+  transform: scale(0.7);
+  top: -10px;
+  left: -6px;
+  background-color: white;
+}
+
+.input-text-container > input {
+  width: 100%;
+}
+
+.input-text-container input.active:focus ~ label {
+  color: blue;
+}
+
+.input-text-container input.valid:focus ~ label,
+input.valid ~ .has-text {
+  color: green;
+}
+
+.input-text-container input.invalid:focus ~ label,
+input.invalid ~ .has-text {
+  color: red;
+}
+
+.upload-form .flex .flex {
+  flex-direction: column;
+}
+
+.err {
+  color: red;
+  font-size: 0.9rem;
+  font-weight: bold;
 }

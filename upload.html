@@ -4,12 +4,13 @@
     <title>DU Central</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" /> -->
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> -->
+    <!-- <link
       href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
+-->
     <link href="style.css" rel="stylesheet" />
     <script src="./script.js" defer></script>
   </head>
@@ -78,28 +79,46 @@
         class="upload-form flex"
         action="/uploads"
         enctype="multipart/form-data"
+        id="upload-form"
       >
-        <label for="contributor">Full Name</label>
-        <input type="text" id="contributor" required />
-        <label for="email">Email</label>
-        <input type="email" required id="email" />
-        <label for="university">University</label>
-        <select name="university">
-          <option>Select a university</option>
-        </select>
-        <div class="flex">
-          <select name="degree">
-            <option>Select a degree</option>
-          </select>
-          <select name="specialization">
-            <option>Select specialization</option>
-          </select>
+        <div class="input-text-container">
+          <span class="err" data-msg="Please enter name"></span>
+          <input type="text" id="contributor" required />
+          <label for="contributor">Full Name</label>
         </div>
-        <select name="course">
-          <option>Select a course</option>
+        <div class="input-text-container">
+          <span class="err" data-msg="Please enter email"></span>
+          <input type="email" required id="email" />
+          <label for="email">Email</label>
+        </div>
+        <select name="university">
+          <option value="" disabled selected>Select a university</option>
         </select>
-        <label for="name">Topic Name</label>
-        <input type="text" name="name" id="name" required />
+        <span class="err" data-msg="Please select university"></span>
+        <div class="flex">
+          <div class="flex">
+            <select name="degree" required>
+              <option value="" disabled selected>Select a degree</option>
+            </select>
+            <span class="err" data-msg="Please select degree"></span>
+          </div>
+          <div class="flex">
+            <select name="specialization" required>
+              <option value="" disabled selected>Select specialization</option>
+              <option value="a">option</option>
+            </select>
+            <span class="err" data-msg="Please select specialization"></span>
+          </div>
+        </div>
+        <select name="course" required>
+          <option disabled selected value="">Select a course</option>
+        </select>
+        <span class="err" data-msg="Please select course"></span>
+        <div class="input-text-container">
+          <span class="err" data-msg="Please enter topic name"></span>
+          <input type="text" name="name" id="name" required />
+          <label for="name">Topic Name</label>
+        </div>
 
         <div class="flex">
           <div>
@@ -146,7 +165,9 @@
             <label for="paper">Previous Year Paper</label>
           </div>
         </div>
+        <span class="err" data-msg="Please select type"></span>
         <input type="file" accept=".pdf, application/pdf" required />
+        <span class="err" data-msg="Please select a file"></span>
         <button type="submit">Submit</button>
       </form>
     </main>
