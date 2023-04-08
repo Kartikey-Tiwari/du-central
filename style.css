@@ -377,3 +377,11 @@ input.invalid ~ .has-text {
   font-size: 0.9rem;
   font-weight: bold;
 }
+
+.response-msg {
+  margin-top: 15px;
+  font-size: 1rem;
+  text-decoration: underline;
+  text-decoration-color: grey;
+  display: none;
+}

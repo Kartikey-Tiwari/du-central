@@ -77,43 +77,10 @@
       <form
         method="post"
         class="upload-form flex"
-        action="/uploads"
+        action="/uploadFile"
         enctype="multipart/form-data"
         id="upload-form"
       >
-        <div class="input-text-container">
-          <span class="err" data-msg="Please enter name"></span>
-          <input type="text" id="contributor" required />
-          <label for="contributor">Full Name</label>
-        </div>
-        <div class="input-text-container">
-          <span class="err" data-msg="Please enter email"></span>
-          <input type="email" required id="email" />
-          <label for="email">Email</label>
-        </div>
-        <select name="university">
-          <option value="" disabled selected>Select a university</option>
-        </select>
-        <span class="err" data-msg="Please select university"></span>
-        <div class="flex">
-          <div class="flex">
-            <select name="degree" required>
-              <option value="" disabled selected>Select a degree</option>
-            </select>
-            <span class="err" data-msg="Please select degree"></span>
-          </div>
-          <div class="flex">
-            <select name="specialization" required>
-              <option value="" disabled selected>Select specialization</option>
-              <option value="a">option</option>
-            </select>
-            <span class="err" data-msg="Please select specialization"></span>
-          </div>
-        </div>
-        <select name="course" required>
-          <option disabled selected value="">Select a course</option>
-        </select>
-        <span class="err" data-msg="Please select course"></span>
         <div class="input-text-container">
           <span class="err" data-msg="Please enter topic name"></span>
           <input type="text" name="name" id="name" required />
@@ -166,9 +133,52 @@
           </div>
         </div>
         <span class="err" data-msg="Please select type"></span>
-        <input type="file" accept=".pdf, application/pdf" required />
+        <input
+          name="file"
+          type="file"
+          accept=".pdf, application/pdf"
+          required
+        />
         <span class="err" data-msg="Please select a file"></span>
+        <div class="input-text-container">
+          <span class="err" data-msg="Please enter name"></span>
+          <input name="contributor" type="text" id="contributor" required />
+          <label for="contributor">Full Name</label>
+        </div>
+        <div class="input-text-container">
+          <span class="err" data-msg="Please enter email"></span>
+          <input name="email" type="email" required id="email" />
+          <label for="email">Email</label>
+        </div>
+        <select name="university">
+          <option value="" disabled selected>Select a university</option>
+        </select>
+        <span class="err" data-msg="Please select university"></span>
+        <div class="flex">
+          <div class="flex">
+            <select name="degree" required>
+              <option value="" disabled selected>Select a degree</option>
+            </select>
+            <span class="err" data-msg="Please select degree"></span>
+          </div>
+          <div class="flex">
+            <select name="specialization" required>
+              <option value="" disabled selected>Select specialization</option>
+            </select>
+            <span class="err" data-msg="Please select specialization"></span>
+          </div>
+        </div>
+        <select name="course" required>
+          <option disabled selected value="">Select a course</option>
+          <option value="option1">option</option>
+        </select>
+        <span class="err" data-msg="Please select course"></span>
         <button type="submit">Submit</button>
+        <p
+          class="response-msg"
+          data-msg="Thank you for your submission!"
+          data-err="Something went wrong..."
+        ></p>
       </form>
     </main>
   </body>
