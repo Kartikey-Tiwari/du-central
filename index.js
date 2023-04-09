@@ -5,6 +5,7 @@ let courseid = 0;
 let curInput;
 let type = "";
 
+const clearBtns = document.querySelectorAll(".clear-search-input");
 const div = document.createElement("div");
 const cardContainer = document.createElement("div");
 const main = document.querySelector("main");
@@ -15,6 +16,16 @@ div.insertAdjacentHTML("afterbegin", html);
 div.append(cardContainer);
 const select = div.querySelector("select");
 const h1 = div.firstElementChild.firstElementChild;
+
+clearBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    btn.previousElementSibling.value = "";
+    btn.previousElementSibling.focus();
+    btn.nextElementSibling.innerHTML = "";
+    btn.nextElementSibling.style.display = "none";
+    btn.style.display = "none";
+  });
+});
 
 select.addEventListener("change", () => {
   type = select.value;
@@ -187,8 +198,14 @@ inputs.forEach((input) => {
 
     if (!val) {
       input.nextElementSibling.nextElementSibling.style.display = "none";
+      console.log(input.value);
+      if (input.value === "") {
+        input.nextElementSibling.style.display = "none";
+      }
       return;
     }
+
+    input.nextElementSibling.style.display = "block";
 
     const filteredCourses = coursesDOM.filter((obj) =>
       obj.course.name.match(new RegExp(val, "i"))
@@ -206,5 +223,9 @@ inputs.forEach((input) => {
       input.nextElementSibling.nextElementSibling.append(course.li);
       curInput = input;
     });
+  });
+  input.addEventListener("blur", () => {
+    input.nextElementSibling.nextElementSibling.style.display = "none";
+    input.nextElementSibling.nextElementSibling.innerHTML = "";
   });
 });
