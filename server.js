@@ -161,9 +161,46 @@ app.get("/script.js", (req, res) => {
   res.sendFile(__dirname + "/script.js");
 });
 
+app.get("/index.js", (req, res) => {
+  res.setHeader("Content-Type", "text/javascript");
+  res.sendFile(__dirname + "/index.js");
+});
+
 app.get("/University_of_Delhi.png", (req, res) => {
   res.setHeader("Content-Type", "image/png");
   res.sendFile(__dirname + "/University_of_Delhi.png");
+});
+
+app.post("/getDocuments", (req, res) => {
+  const courseid = req.body.courseid;
+  const type = req.body.type;
+  const num = req.body.num;
+  const offset = req.body.offset;
+  let response = [];
+  new Promise((res, rej) => {
+    con.query(
+      "SELECT *,(SELECT `name` from `course` where `id`=`course`) as 'course_name', (select uni from unidegree where id=(select degree_id from specialization where id=(select spec_id from course where id=course))) as uni, (select concat((select degree from unidegree where id = (select degree_id from specialization where id=(select spec_id from course where id=course))),' ' ,(select specialization from specialization where id=(select spec_id from course where id=course)))) as degree from `material` WHERE `course`=?" +
+        `${type !== "" ? ` and type="${type}"` : ""}` +
+        ` limit ${offset}, ${num}`,
+      [courseid],
+      function (err, result, fields) {
+        if (err) throw err;
+        res(result);
+      }
+    );
+  }).then((result) => {
+    response.push(result);
+    con.query(
+      "SELECT count(*) as count FROM `material` WHERE `course`=?" +
+        `${type !== "" ? ` and type="${type}"` : ""}`,
+      [courseid],
+      function (err, result, fields) {
+        if (err) throw err;
+        response.push(result[0]);
+        res.send(response);
+      }
+    );
+  });
 });
 
 // Route for handling file uploads
@@ -239,10 +276,40 @@ app.post("/specializations", (req, res) => {
   );
 });
 
+app.post("/allCourses", (req, res) => {
+  con.query(
+    "SELECT `name`,`id`,(SELECT `uni` from `unidegree` where id = (SELECT `degree_id` from `specialization` where `id`=`spec_id`)) as `uni` FROM `course`",
+    function (err, results, fields) {
+      if (err) throw err;
+      res.send(results);
+    }
+  );
+});
+
 app.post("/courses", (req, res) => {
   con.query(
     "SELECT `name`,`id` FROM `course` where `spec_id`=?",
     [req.body.specialization],
+    function (err, results, fields) {
+      if (err) throw err;
+      res.send(results);
+    }
+  );
+});
+
+app.post("/updateViews", (req, res) => {
+  con.query(
+    "UPDATE `material` SET `views`=`views`+1 WHERE `id`=?",
+    [req.body.id],
+    function (err, results, fields) {
+      if (err) {
+        throw err;
+      }
+    }
+  );
+  con.query(
+    "SELECT `views` FROM `material` WHERE `id`=?",
+    [req.body.id],
     function (err, results, fields) {
       if (err) throw err;
       res.send(results);
