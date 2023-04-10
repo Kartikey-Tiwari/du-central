@@ -555,3 +555,37 @@ input.invalid ~ .has-text {
   font-size: 1.2rem;
   margin: 20px 30px;
 }
+
+.loader {
+  border: 12px solid #f3f3f3; /* Light grey */
+  border-top: 12px solid #555; /* Blue */
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 1s linear infinite;
+  position: fixed;
+  z-index: 1002;
+  top: calc(50% - 40px);
+  left: calc(50% - 40px);
+  display: none;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1001;
+  display: none;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

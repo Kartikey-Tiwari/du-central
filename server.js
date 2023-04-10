@@ -286,8 +286,7 @@ app.post(
     fs.unlink(`uploads/${req.files.file[0].filename}`, (err) => {
       if (err) throw err;
     });
-    let date = new Date().toISOString();
-    date = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+    let date = new Date().toISOString().slice(0, 19).replace("T", " ");
     con.query(
       "INSERT INTO `material` values (?,?,?,?,?,?,?,?,?)",
       [

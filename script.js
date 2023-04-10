@@ -6,17 +6,25 @@
   const fileInput = document.querySelector("#upload-form input[type='file']");
   const submit = document.querySelector("#upload-form button");
   const p = document.querySelector(".response-msg");
+  const loader = document.querySelector(".loader");
+  const overlay = document.querySelector(".overlay");
 
   async function submitForm() {
     const formData = new FormData(form);
+    overlay.style.display = "block";
+    loader.style.display = "block";
     try {
       const response = await fetch("/uploadFile", {
         method: "POST",
         body: formData,
       });
       const data = await response.json();
+      overlay.style.display = "none";
+      loader.style.display = "none";
       return data;
     } catch (error) {
+      overlay.style.display = "none";
+      loader.style.display = "none";
       console.error(error);
     }
   }
