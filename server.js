@@ -181,9 +181,32 @@ app.get("/index.js", (req, res) => {
   res.sendFile(__dirname + "/index.js");
 });
 
+app.get("/home.js", (req, res) => {
+  res.setHeader("Content-Type", "text/javascript");
+  res.sendFile(__dirname + "/home.js");
+});
+
 app.get("/University_of_Delhi.png", (req, res) => {
   res.setHeader("Content-Type", "image/png");
   res.sendFile(__dirname + "/University_of_Delhi.png");
+});
+
+app.post("/mostViewed", (req, res) => {
+  const sql =
+    "SELECT *, (select name from course where id=course) as course_name FROM `material` ORDER BY `views` DESC LIMIT 3";
+  con.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+app.post("/recent", (req, res) => {
+  const sql =
+    "SELECT *, (select name from course where id=course) as course_name FROM `material` ORDER BY `upload_date` DESC LIMIT 3";
+  con.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
 });
 
 app.post("/semesters", (req, res) => {
@@ -263,7 +286,7 @@ app.post(
     fs.unlink(`uploads/${req.files.file[0].filename}`, (err) => {
       if (err) throw err;
     });
-    let date = new Date();
+    let date = new Date().toISOString();
     date = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
     con.query(
       "INSERT INTO `material` values (?,?,?,?,?,?,?,?,?)",

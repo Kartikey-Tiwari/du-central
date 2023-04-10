@@ -224,7 +224,7 @@ main > section {
 .main-container {
   width: min(1100px, 90vw);
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
 
@@ -237,12 +237,17 @@ main > section {
 
 .list-links {
   flex-direction: column;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
 }
 
 .list-links li {
   display: flex;
   flex-direction: column;
   padding: 10px 5px;
+  width: 100%;
+  padding: 10px;
+  background-color: #fff;
 }
 
 .list-links li:hover {
@@ -250,7 +255,7 @@ main > section {
   transform: translateY(-5px);
 }
 
-.list-links li a {
+.list-links li a:not(:last-of-type) {
   cursor: pointer;
 }
 
@@ -269,8 +274,7 @@ main > section {
 }
 
 .file-link:hover,
-.subject-link:hover,
-.uploader-link:hover {
+.subject-link:hover {
   text-decoration: underline;
   color: rgb(0 139 139);
 }
@@ -539,8 +543,12 @@ input.invalid ~ .has-text {
   font-size: 2rem;
   font-weight: bold;
   margin: 20px 30px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid grey;
+  width: 100%;
+  text-align: center;
+  text-decoration: underline;
+  text-decoration-color: grey;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 8px;
 }
 
 .about-p {

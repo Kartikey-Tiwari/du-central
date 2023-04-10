@@ -5,6 +5,14 @@ let courseid = 0;
 let curInput;
 let type = "";
 
+const forms = document.querySelectorAll(".form");
+forms.forEach((form) => {
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    return;
+  });
+});
+
 const clearBtns = document.querySelectorAll(".clear-search-input");
 const div = document.createElement("div");
 let cardContainer = document.createElement("div");
