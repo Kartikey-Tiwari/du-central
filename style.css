@@ -475,6 +475,8 @@ input.invalid ~ .has-text {
   justify-content: space-around;
   padding: 0 30px 30px;
   gap: 15px;
+  width: 100%;
+  margin-bottom: auto;
 }
 
 .course-files-header {
@@ -490,4 +492,45 @@ input.invalid ~ .has-text {
 .course-files-header h1 {
   font-size: 1.5rem;
   font-weight: bold;
+}
+
+.load-more {
+  margin-bottom: 20px;
+}
+
+.no-data {
+  background-color: #f5f5f5;
+  font-size: 1.5rem;
+  font-style: italic;
+  font-weight: bold;
+  text-align: center;
+}
+
+.dashboard-header {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  padding: 20px 30px;
+  border-bottom: 1px solid grey;
+  width: 100%;
+}
+
+.courses-list {
+  display: flex;
+  padding: 10px;
+  gap: 10px;
+  justify-content: space-between;
+  margin-bottom: auto;
+}
+
+.course-item {
+  padding: 10px;
+  border: 1px solid grey;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #f5f5f5;
+}
+
+.course-item.selected {
+  background-color: grey;
 }

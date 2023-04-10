@@ -7,7 +7,7 @@ let type = "";
 
 const clearBtns = document.querySelectorAll(".clear-search-input");
 const div = document.createElement("div");
-const cardContainer = document.createElement("div");
+let cardContainer = document.createElement("div");
 const main = document.querySelector("main");
 div.classList.add("container");
 cardContainer.classList.add("card-container");
@@ -86,15 +86,14 @@ function createCard(dat) {
           </div>
         </div>`;
   cardContainer.insertAdjacentHTML("beforeend", html);
-  cardContainer.lastElementChild
-    .querySelector(".download")
-    .addEventListener("click", () => {
-      window.open(
-        `https://drive.google.com/uc?id=${dat.id}&export=download`,
-        "_blank"
-      );
-    });
-  cardContainer.lastElementChild.addEventListener("click", () => {
+  const card = cardContainer.lastElementChild;
+  card.querySelector(".download").addEventListener("click", () => {
+    window.open(
+      `https://drive.google.com/uc?id=${dat.id}&export=download`,
+      "_blank"
+    );
+  });
+  card.addEventListener("click", () => {
     fetch("/updateViews", {
       method: "POST",
       headers: {
@@ -103,15 +102,16 @@ function createCard(dat) {
       body: JSON.stringify({ id: dat.id }),
     })
       .then((res) => res.json())
-      .then((data) => {
-        cardContainer.lastElementChild.querySelector(
-          ".views"
-        ).textContent = `👀 ${dat.views} views`;
+      .then((views) => {
+        console.log("data: ", views[0]);
+        card.querySelector(".views").textContent = `👀 ${views[0].views} views`;
+      })
+      .then(() => {
+        window.open(
+          `https://drive.google.com/uc?export=media&id=${dat.id}`,
+          "_blank"
+        );
       });
-    window.open(
-      `https://drive.google.com/uc?export=media&id=${dat.id}`,
-      "_blank"
-    );
   });
 }
 
@@ -132,8 +132,6 @@ function fetchDocuments() {
     .then((data) => {
       numLoaded += data[0].length;
 
-      console.log(data[0].length, numLoaded, data[1].count);
-
       if (numLoaded !== data[1].count) {
         if (!main.contains(btn)) main.append(btn);
         btn.style.display = "block";
@@ -143,6 +141,9 @@ function fetchDocuments() {
       data[0].forEach((dat) => {
         createCard(dat);
       });
+      if (data[0].length === 0) {
+        cardContainer.innerHTML = `<div class="no-data">Sorry no data available!</div>`;
+      }
     });
 }
 
@@ -223,9 +224,5 @@ inputs.forEach((input) => {
       input.nextElementSibling.nextElementSibling.append(course.li);
       curInput = input;
     });
-  });
-  input.addEventListener("blur", () => {
-    input.nextElementSibling.nextElementSibling.style.display = "none";
-    input.nextElementSibling.nextElementSibling.innerHTML = "";
   });
 });

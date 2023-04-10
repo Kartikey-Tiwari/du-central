@@ -146,9 +146,19 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
-app.get("/upload.html", (req, res) => {
+app.get("/upload", (req, res) => {
   res.setHeader("Content-Type", "text/html");
   res.sendFile(__dirname + "/upload.html");
+});
+
+app.get("/dashboard", (req, res) => {
+  res.setHeader("Content-Type", "text/html");
+  res.sendFile(__dirname + "/dashboard.html");
+});
+
+app.get("/dashboard.js", (req, res) => {
+  res.setHeader("Content-Type", "text/javascript");
+  res.sendFile(__dirname + "/dashboard.js");
 });
 
 app.get("/style.css", (req, res) => {
@@ -169,6 +179,31 @@ app.get("/index.js", (req, res) => {
 app.get("/University_of_Delhi.png", (req, res) => {
   res.setHeader("Content-Type", "image/png");
   res.sendFile(__dirname + "/University_of_Delhi.png");
+});
+
+app.post("/semesters", (req, res) => {
+  const degree = req.body.degree;
+  con.query(
+    "SELECT semesters FROM `degree` WHERE `name`=(SELECT degree from unidegree where id=?)",
+    [degree],
+    (err, result) => {
+      if (err) throw err;
+      res.send(result);
+    }
+  );
+});
+
+app.post("/semesterCourses", (req, res) => {
+  const specialization = req.body.specialization;
+  const semester = req.body.semester;
+  con.query(
+    "SELECT `name`,`id` FROM `course` WHERE `spec_id`=? and semester=?",
+    [specialization, semester],
+    (err, result) => {
+      if (err) throw err;
+      res.send(result);
+    }
+  );
 });
 
 app.post("/getDocuments", (req, res) => {
