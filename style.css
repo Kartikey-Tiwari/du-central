@@ -534,3 +534,16 @@ input.invalid ~ .has-text {
 .course-item.selected {
   background-color: grey;
 }
+
+.about-header {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 20px 30px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid grey;
+}
+
+.about-p {
+  font-size: 1.2rem;
+  margin: 20px 30px;
+}

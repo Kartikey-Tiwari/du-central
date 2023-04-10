@@ -12,7 +12,6 @@
     />
     <link href="style.css" rel="stylesheet" />
     <script src="./index.js" defer></script>
-    <script src="./dashboard.js" defer></script>
   </head>
   <body>
     <header class="flex">
@@ -25,8 +24,8 @@
             <li><a href="/">Home</a></li>
             <li><a href="/dashboard">Dashboard</a></li>
             <li><a href="/upload">Upload</a></li>
-            <li><a href="/about">About Us</a></li>
-            <li><a href="/contact">Contact</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact</a></li>
           </ul>
         </nav>
       </div>
@@ -65,23 +64,38 @@
       </div>
     </header>
     <main>
-      <form action="/semesterCourses" method="post" class="dashboard-header">
-        <select name="uni">
-          <option value="" disabled selected>Select a university</option>
-        </select>
-        <select name="degree">
-          <option value="" disabled selected>Select a degree</option>
-        </select>
-        <select name="specialization">
-          <option value="" disabled selected>Select a specialization</option>
-        </select>
-        <select name="semester">
-          <option value="" disabled selected>Select a semester</option>
-        </select>
-        <button>Submit</button>
-      </form>
-      <ul class="courses-list"></ul>
-      <div class="card-container"></div>
+      <h2 class="about-header">Welcome to DU Central!</h2>
+      <p class="about-p">
+        DU Central is a website created by and for college students who are
+        looking for academic resources to aid them in their studies. We offer a
+        platform for students to share and access a wide range of materials,
+        including notes, eBooks, practical files, and question papers.
+      </p>
+      <h2 class="about-header">Our Mission</h2>
+      <p class="about-p">
+        Our website is built around the idea that students can learn best from
+        one another. By sharing your own resources, you can help your peers
+        achieve their academic goals, while also benefitting from the materials
+        that they have shared. We believe that this approach to learning can
+        foster a sense of community and collaboration among students, which can
+        lead to greater success in the classroom and beyond.
+      </p>
+      <h2 class="about-header">How it works?</h2>
+      <p class="about-p">
+        At DU Central, we value the contributions of our users and are committed
+        to ensuring that our platform is safe and user-friendly. We carefully
+        review all submissions to ensure that they meet our high standards of
+        quality and accuracy. We also work hard to keep our website up-to-date
+        and easy to navigate, so you can find the resources you need quickly and
+        easily.
+      </p>
+      <h2 class="about-header">Our Values</h2>
+      <p class="about-p">
+        We are dedicated to providing our users with a safe and secure platform
+        to share and access academic resources. Our website is designed to
+        protect your privacy and personal information, so you can feel confident
+        and secure when using Du Central.
+      </p>
     </main>
   </body>
 </html>

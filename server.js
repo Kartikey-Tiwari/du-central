@@ -156,6 +156,11 @@ app.get("/dashboard", (req, res) => {
   res.sendFile(__dirname + "/dashboard.html");
 });
 
+app.get("/about", (req, res) => {
+  res.setHeader("Content-Type", "text/html");
+  res.sendFile(__dirname + "/about.html");
+});
+
 app.get("/dashboard.js", (req, res) => {
   res.setHeader("Content-Type", "text/javascript");
   res.sendFile(__dirname + "/dashboard.js");
