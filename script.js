@@ -97,7 +97,7 @@
       const data = await submitForm();
       clearForm();
       p.style.display = "block";
-      if (!data) {
+      if (!data || data.id === "null") {
         p.textContent = p.dataset.err;
         return;
       }

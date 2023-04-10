@@ -228,7 +228,6 @@ inputs.forEach((input) => {
     }
 
     input.nextElementSibling.nextElementSibling.style.display = "block";
-    console.log(filteredCourses);
     filteredCourses.forEach((course) => {
       input.nextElementSibling.nextElementSibling.append(course.li);
       curInput = input;

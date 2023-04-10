@@ -15,8 +15,7 @@ function createLis(data) {
     const courseLink = document.createElement("a");
     courseLink.classList.add("subject-link");
     courseLink.addEventListener("click", () => {
-      course.id = course.course;
-      resetDOM(course);
+      resetDOM({ name: course.course_name, id: course.course });
     });
     courseLink.textContent = course.course_name;
     li.append(courseLink);

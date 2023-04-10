@@ -248,6 +248,7 @@ app.post("/getDocuments", (req, res) => {
       [courseid],
       function (err, result, fields) {
         if (err) throw err;
+        console.log(result);
         res(result);
       }
     );
@@ -286,6 +287,10 @@ app.post(
     fs.unlink(`uploads/${req.files.file[0].filename}`, (err) => {
       if (err) throw err;
     });
+    if (id === null) {
+      res.send(`{"id": "null"}`);
+      return;
+    }
     let date = new Date().toISOString().slice(0, 19).replace("T", " ");
     con.query(
       "INSERT INTO `material` values (?,?,?,?,?,?,?,?,?)",

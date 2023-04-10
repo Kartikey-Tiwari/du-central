@@ -540,11 +540,10 @@ input.invalid ~ .has-text {
 }
 
 .about-header {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
-  margin: 20px 30px;
+  padding: 20px 30px;
   width: 100%;
-  text-align: center;
   text-decoration: underline;
   text-decoration-color: grey;
   text-decoration-thickness: 2px;
@@ -552,8 +551,8 @@ input.invalid ~ .has-text {
 }
 
 .about-p {
-  font-size: 1.2rem;
-  margin: 20px 30px;
+  font-size: 1rem;
+  padding: 0 30px;
 }
 
 .loader {
