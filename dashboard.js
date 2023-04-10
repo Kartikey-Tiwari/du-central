@@ -1,6 +1,19 @@
 const selects = document.querySelectorAll("select");
 cardContainer = document.querySelector(".card-container");
 const ul = document.querySelector(".courses-list");
+ul.insertAdjacentHTML(
+  "afterbegin",
+  `<select name="type"><option selected value="">All</option><option value="notes">Notes</option><option value="paper">Question papers</option><option value="practical">Practical Files</option><option value="ebook">Ebook</option></select>`
+);
+const options = ul.lastElementChild;
+options.style.display = "none";
+
+options.addEventListener("change", () => {
+  type = options.value;
+  numLoaded = 0;
+  cardContainer.innerHTML = "";
+  if (courseid) fetchDocuments();
+});
 
 window.addEventListener("load", async function () {
   fetch("/universities", {
@@ -153,6 +166,7 @@ form.addEventListener("submit", (e) => {
         li.textContent = course.name;
         li.classList.add("course-item");
         li.addEventListener("click", () => {
+          options.value = "";
           cardContainer.innerHTML = "";
           lis.forEach((li) => {
             li.classList.remove("selected");
@@ -165,9 +179,12 @@ form.addEventListener("submit", (e) => {
         });
         lis.push(li);
       });
-      ul.append(...lis);
+      ul.prepend(...lis);
       if (data.length === 0) {
         ul.innerHTML = "<div class='no-data'>No courses found</div>";
+      } else {
+        if (!ul.contains(options)) ul.append(options);
+        options.style.display = "block";
       }
     });
 });

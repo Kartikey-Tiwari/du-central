@@ -103,7 +103,6 @@ function createCard(dat) {
     })
       .then((res) => res.json())
       .then((views) => {
-        console.log("data: ", views[0]);
         card.querySelector(".views").textContent = `👀 ${views[0].views} views`;
       })
       .then(() => {
@@ -161,6 +160,8 @@ function resetDOM(course) {
   main.innerHTML = "";
   main.append(div);
   cardContainer.innerHTML = "";
+  div.lastElementChild.remove();
+  div.append(cardContainer);
 
   fetchDocuments();
 }
