@@ -555,6 +555,10 @@ input.invalid ~ .has-text {
   padding: 0 30px;
 }
 
+.about-p:last-of-type {
+  margin-bottom: 20px;
+}
+
 .loader {
   border: 12px solid #f3f3f3; /* Light grey */
   border-top: 12px solid #555; /* Blue */
@@ -644,6 +648,7 @@ input.invalid ~ .has-text {
 
   header > div:first-child > nav > ul {
     flex-direction: column;
+    margin-top: 10px;
     gap: 10px;
   }
 
@@ -679,12 +684,22 @@ input.invalid ~ .has-text {
 
 @media screen and (max-width: 500px) {
   .logo-big {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
   .courses-list {
     flex-wrap: wrap;
   }
   .hero-section {
-    background-size: 270px;
+    background-size: 250px;
+  }
+  .course-files-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .form:last-of-type {
+    width: min(80vw, 500px);
+  }
+  .hero-section > div {
+    width: 100%;
   }
 }

@@ -186,6 +186,11 @@ app.get("/home.js", (req, res) => {
   res.sendFile(__dirname + "/home.js");
 });
 
+app.get("/favicon.ico", (req, res) => {
+  res.setHeader("Content-Type", "image/x-icon");
+  res.sendFile(__dirname + "/favicon.ico");
+});
+
 app.get("/University_of_Delhi.png", (req, res) => {
   res.setHeader("Content-Type", "image/png");
   res.sendFile(__dirname + "/University_of_Delhi.png");
