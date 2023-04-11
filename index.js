@@ -5,6 +5,14 @@ let courseid = 0;
 let curInput;
 let type = "";
 
+const nav = document.querySelector("header nav ul.flex");
+const search = document.querySelector("header > div:last-child");
+const toggleBtn = document.querySelector(".toggle-button");
+toggleBtn.addEventListener("click", () => {
+  nav.classList.toggle("active");
+  search.classList.toggle("active");
+});
+
 const forms = document.querySelectorAll(".form");
 forms.forEach((form) => {
   form.addEventListener("submit", (e) => {
@@ -45,56 +53,64 @@ select.addEventListener("change", () => {
 function createCard(dat) {
   const html = `<div class="card">
           <div class="flex card-header">
-            <h3>${
-              dat.type === "ebook"
-                ? "Ebook"
-                : dat.type === "paper"
-                ? "Question Paper"
-                : dat.type === "notes"
-                ? "Notes"
-                : "Practical File"
-            }</h3>
+            <h3></h3>
             <!--<div>
               <button>⬆️</button>
               <button>⬇️</button>
-              <span>${dat.votes}</span>
+              <span></span>
             </div> -->
           </div>
           <div class="card-data">
             <div class="card-row">
               <span class="card-key">Topic</span>
-              <span class="card-value">${dat.name}</span>
+              <span class="card-value name"></span>
             </div>
             <div class="card-row">
               <span class="card-key">Course</span>
-              <span class="card-value">${dat.course_name}</span>
+              <span class="card-value course-name"></span>
             </div>
             <div class="card-row">
               <span class="card-key">Degree</span>
-              <span class="card-value">${dat.degree}</span>
+              <span class="card-value degree"></span>
             </div>
             <div class="card-row">
               <span class="card-key">University</span>
-              <span class="card-value">${dat.uni}</span>
+              <span class="card-value uni"></span>
             </div>
             <div class="card-row">
               <span class="card-key">Contributor</span>
-              <span class="card-value">${dat.contributor}</span>
+              <span class="card-value contri"></span>
             </div>
             <div class="card-row">
               <span class="card-key">Upload Date</span>
-              <span class="card-value">${new Intl.DateTimeFormat().format(
-                new Date(dat.upload_date)
-              )}</span>
+              <span class="card-value upload"></span>
             </div>
             <div class="card-footer">
-              <span class="views">👀 ${dat.views} views</span>
+              <span class="views"></span>
               <button class="download">Download</button>
             </div>
           </div>
         </div>`;
   cardContainer.insertAdjacentHTML("beforeend", html);
   const card = cardContainer.lastElementChild;
+  card.querySelector(".views").textContent = `👀 ${dat.views} views`;
+  card.querySelector(".upload").textContent = new Intl.DateTimeFormat().format(
+    new Date(dat.upload_date)
+  );
+  card.querySelector(".contri").textContent = dat.contributor;
+  card.querySelector(".name").textContent = dat.name;
+  card.querySelector(".course-name").textContent = dat.course_name;
+  card.querySelector(".degree").textContent = dat.degree;
+  card.querySelector(".uni").textContent = dat.uni;
+  card.querySelector("h3").textContent =
+    dat.type === "ebook"
+      ? "Ebook"
+      : dat.type === "paper"
+      ? "Question Paper"
+      : dat.type === "notes"
+      ? "Notes"
+      : "Practical File";
+
   card.querySelector(".download").addEventListener("click", () => {
     window.open(
       `https://drive.google.com/uc?id=${dat.id}&export=download`,

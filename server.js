@@ -248,7 +248,6 @@ app.post("/getDocuments", (req, res) => {
       [courseid],
       function (err, result, fields) {
         if (err) throw err;
-        console.log(result);
         res(result);
       }
     );
