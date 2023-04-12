@@ -246,7 +246,7 @@ app.post("/getDocuments", (req, res) => {
     con.query(
       'SELECT *,(SELECT "name" from "course" where "id"="course") as "course_name", (select uni from unidegree where id=(select degree_id from specialization where id=(select spec_id from course where id=course))) as uni, (select concat((select degree from unidegree where id = (select degree_id from specialization where id=(select spec_id from course where id=course))),\' \' ,(select specialization from specialization where id=(select spec_id from course where id=course)))) as degree from "material" WHERE "course"=$1' +
         `${type !== "" ? ` and type="${type}"` : ""}` +
-        ` limit ${offset}, ${num}`,
+        ` limit ${num} offset ${offset}`,
       [courseid],
       function (err, result, fields) {
         if (err) throw err;
