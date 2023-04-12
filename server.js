@@ -78,11 +78,11 @@ async function uploadBasic(fileName) {
     name: fileName,
     fields: "id",
   };
-  const media = {
-    mimeType: "application/pdf",
-    body: fs.createReadStream(`uploads/${fileName}`),
-  };
   try {
+    const media = {
+      mimeType: "application/pdf",
+      body: fs.createReadStream(`uploads/${fileName}`),
+    };
     const file = await drive.files.create({
       requestBody,
       media,
@@ -127,16 +127,17 @@ const app = express();
 app.use(bodyParser.json());
 
 // Set up multer middleware
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/");
-  },
-  filename: function (req, file, cb) {
-    const fileName = `${Date.now()}${file.originalname}`;
-    cb(null, fileName);
-  },
-});
-const upload = multer({ storage: storage });
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, "uploads/");
+//   },
+//   filename: function (req, file, cb) {
+//     const fileName = `${Date.now()}${file.originalname}`;
+//     cb(null, fileName);
+//   },
+// });
+// const upload = multer({ storage: storage });
+const upload = multer();
 
 // Route for serving the file upload form
 app.get("/", (req, res) => {
@@ -285,9 +286,9 @@ app.post(
   async function (req, res) {
     // Process the uploaded file here
     const id = await uploadBasic(req.files.file[0].filename);
-    fs.unlink(`uploads/${req.files.file[0].filename}`, (err) => {
-      if (err) throw err;
-    });
+    // fs.unlink(`uploads/${req.files.file[0].filename}`, (err) => {
+    //   if (err) console.log(err);
+    // });
     if (id === null) {
       res.send(`{"id": "null"}`);
       return;
