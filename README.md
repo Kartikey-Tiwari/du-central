@@ -1,6 +1,6 @@
 # DU Central :books: :file_folder: :computer:
 
-DU Central is a website where people can upload and download notes, question papers, practical files and ebooks for University courses. The website uses Node.js for the backend and Vanilla JavaScript for the frontend. Google Drive API is used to store the uploaded files and MySQL as the database.
+DU Central is a website where people can upload and download notes, question papers, practical files and ebooks for University courses. The website uses Node.js for the backend and Vanilla JavaScript for the frontend. Google Drive API is used to store the uploaded files and PostgreSQL as the database.
 
 ## Getting Started :rocket:
 
@@ -13,7 +13,8 @@ To run the site, you can follow these steps:
 3. Create a service account from Google Cloud Console, and get the credentials.js file from there.
 4. Put the `credentials.js` file in the current directory.
 5. Create database ducentral on your machine and change the username and password in the server.js file
-   `mysql -u [username] -p ducentral < ducentral.sql`
+   `psql -f ducentral.sql your_db_name`
+6. Set up your environment variables for the database host, user, password and database name.
 6. Run the server
    `node server.js`
 
@@ -31,3 +32,5 @@ To run the site, you can follow these steps:
 - Make your changes, and commit them with a descriptive commit message.
 - Push your changes to your forked repository.
 - Create a pull request from your branch to the main repository.
+
+:point_right:[Live Link](https://du-central.onrender.com/):point_left:

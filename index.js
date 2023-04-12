@@ -177,6 +177,7 @@ function clearInput() {
 }
 
 function resetDOM(course) {
+  select.value=""
   type = "";
   courseid = course.id;
   numLoaded = 0;
