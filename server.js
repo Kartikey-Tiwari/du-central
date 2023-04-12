@@ -1,17 +1,14 @@
 const fs = require("fs");
 const { google } = require("googleapis");
-const credentials = require("./credentials.json");
 const bodyParser = require("body-parser");
-const mysql = require("mysql");
+const { Client } = require("pg");
 const scopes = ["https://www.googleapis.com/auth/drive"];
 
-const con = mysql.createConnection({
-  host: "localhost",
-  user: "college",
-  password: "OSsA3yQr2!FzFbgUB!vEPVX6xcHd5ji",
-  database: "ducentral",
-  port: "3000",
-  socketPath: "/var/run/mysqld/mysqld.sock",
+const con = new Client({
+  host: process.env.host,
+  user: process.env.username,
+  password: process.env.password,
+  database: process.env.database,
 });
 
 con.connect(function (err) {
@@ -20,9 +17,9 @@ con.connect(function (err) {
 });
 
 const auth = new google.auth.JWT(
-  credentials.client_email,
+  process.env.client_email,
   null,
-  credentials.private_key,
+  process.env.private_key,
   scopes
 );
 
@@ -198,30 +195,30 @@ app.get("/University_of_Delhi.png", (req, res) => {
 
 app.post("/mostViewed", (req, res) => {
   const sql =
-    "SELECT *, (select name from course where id=course) as course_name FROM `material` ORDER BY `views` DESC LIMIT 3";
+    'SELECT *, (select name from course where id=course) as course_name FROM "material" ORDER BY "views" DESC LIMIT 3';
   con.query(sql, (err, result) => {
     if (err) throw err;
-    res.send(result);
+    res.send(result.rows);
   });
 });
 
 app.post("/recent", (req, res) => {
   const sql =
-    "SELECT *, (select name from course where id=course) as course_name FROM `material` ORDER BY `upload_date` DESC LIMIT 3";
+    'SELECT *, (select name from course where id=course) as course_name FROM "material" ORDER BY "upload_date" DESC LIMIT 3';
   con.query(sql, (err, result) => {
     if (err) throw err;
-    res.send(result);
+    res.send(result.rows);
   });
 });
 
 app.post("/semesters", (req, res) => {
   const degree = req.body.degree;
   con.query(
-    "SELECT semesters FROM `degree` WHERE `name`=(SELECT degree from unidegree where id=?)",
+    'SELECT semesters FROM "degree" WHERE "name"=(SELECT "degree" from "unidegree" where "id"=$1)',
     [degree],
     (err, result) => {
       if (err) throw err;
-      res.send(result);
+      res.send(result.rows);
     }
   );
 });
@@ -230,11 +227,11 @@ app.post("/semesterCourses", (req, res) => {
   const specialization = req.body.specialization;
   const semester = req.body.semester;
   con.query(
-    "SELECT `name`,`id` FROM `course` WHERE `spec_id`=? and semester=?",
+    "SELECT `name`,`id` FROM `course` WHERE `spec_id`=$1 and semester=$2",
     [specialization, semester],
     (err, result) => {
       if (err) throw err;
-      res.send(result);
+      res.send(result.rows);
     }
   );
 });
@@ -247,7 +244,7 @@ app.post("/getDocuments", (req, res) => {
   let response = [];
   new Promise((res, rej) => {
     con.query(
-      "SELECT *,(SELECT `name` from `course` where `id`=`course`) as 'course_name', (select uni from unidegree where id=(select degree_id from specialization where id=(select spec_id from course where id=course))) as uni, (select concat((select degree from unidegree where id = (select degree_id from specialization where id=(select spec_id from course where id=course))),' ' ,(select specialization from specialization where id=(select spec_id from course where id=course)))) as degree from `material` WHERE `course`=?" +
+      'SELECT *,(SELECT "name" from "course" where "id"="course") as "course_name", (select uni from unidegree where id=(select degree_id from specialization where id=(select spec_id from course where id=course))) as uni, (select concat((select degree from unidegree where id = (select degree_id from specialization where id=(select spec_id from course where id=course))),\' \' ,(select specialization from specialization where id=(select spec_id from course where id=course)))) as degree from "material" WHERE "course"=$1' +
         `${type !== "" ? ` and type="${type}"` : ""}` +
         ` limit ${offset}, ${num}`,
       [courseid],
@@ -259,13 +256,13 @@ app.post("/getDocuments", (req, res) => {
   }).then((result) => {
     response.push(result);
     con.query(
-      "SELECT count(*) as count FROM `material` WHERE `course`=?" +
-        `${type !== "" ? ` and type="${type}"` : ""}`,
+      'SELECT count(*) as count FROM "material" WHERE "course"=$1' +
+        `${type !== "" ? ` and "type"='${type}'` : ""}`,
       [courseid],
       function (err, result, fields) {
         if (err) throw err;
         response.push(result[0]);
-        res.send(response);
+        res.send(response.rows);
       }
     );
   });
@@ -297,7 +294,7 @@ app.post(
     }
     let date = new Date().toISOString().slice(0, 19).replace("T", " ");
     con.query(
-      "INSERT INTO `material` values (?,?,?,?,?,?,?,?,?)",
+      'INSERT INTO "material" values (?,?,?,?,?,?,?,?,?)',
       [
         id,
         req.body.name,
@@ -319,47 +316,47 @@ app.post(
 );
 
 app.post("/universities", (req, res) => {
-  con.query("SELECT * FROM `university`", function (err, results, fields) {
+  con.query('SELECT * FROM "university"', function (err, results, fields) {
     if (err) throw err;
-    res.send(results);
+    res.send(results.rows);
   });
 });
 
 app.post("/degrees", (req, res) => {
   con.query(
-    "SELECT `degree`,`id` FROM `unidegree` where `uni`=?",
+    'SELECT "degree","id" FROM "unidegree" where "uni"=$1',
     [req.body.university],
     function (err, results, fields) {
       if (err) throw err;
-      res.send(results);
+      res.send(results.rows);
     }
   );
 });
 
 app.post("/specializations", (req, res) => {
   con.query(
-    "SELECT `specialization`,`id` FROM `specialization` where `degree_id`=?",
+    'SELECT "specialization","id" FROM "specialization" where "degree_id"=$1',
     [req.body.degree],
     function (err, results, fields) {
       if (err) throw err;
-      res.send(results);
+      res.send(results.rows);
     }
   );
 });
 
 app.post("/allCourses", (req, res) => {
   con.query(
-    "SELECT `name`,`id`,(SELECT `uni` from `unidegree` where id = (SELECT `degree_id` from `specialization` where `id`=`spec_id`)) as `uni` FROM `course`",
+    'SELECT "name","id",(SELECT "uni" from "unidegree" where id = (SELECT "degree_id" from "specialization" where "id"="spec_id")) as "uni" FROM "course"',
     function (err, results, fields) {
       if (err) throw err;
-      res.send(results);
+      res.send(results.rows);
     }
   );
 });
 
 app.post("/courses", (req, res) => {
   con.query(
-    "SELECT `name`,`id` FROM `course` where `spec_id`=?",
+    'SELECT "name","id" FROM "course" where "spec_id"=$1',
     [req.body.specialization],
     function (err, results, fields) {
       if (err) throw err;
@@ -370,7 +367,7 @@ app.post("/courses", (req, res) => {
 
 app.post("/updateViews", (req, res) => {
   con.query(
-    "UPDATE `material` SET `views`=`views`+1 WHERE `id`=?",
+    'UPDATE "material" SET "views"="views"+1 WHERE "id"=$1',
     [req.body.id],
     function (err, results, fields) {
       if (err) {
@@ -379,11 +376,11 @@ app.post("/updateViews", (req, res) => {
     }
   );
   con.query(
-    "SELECT `views` FROM `material` WHERE `id`=?",
+    'SELECT "views" FROM "material" WHERE "id"=$1',
     [req.body.id],
     function (err, results, fields) {
       if (err) throw err;
-      res.send(results);
+      res.send(results.rows);
     }
   );
 });
