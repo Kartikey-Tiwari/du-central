@@ -34,3 +34,4 @@ To run the site, you can follow these steps:
 - Create a pull request from your branch to the main repository.
 
 :point_right:[Live Link](https://du-central.onrender.com/):point_left:
+Note: upload doesn't work as I'm using free deploying tier

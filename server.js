@@ -232,6 +232,7 @@ app.post(
   async function (req, res) {
     // Process the uploaded file here
     res.send(`{"id": null}`);
+    return;
     const id = await uploadBasic(req.files.file[0].filename);
     fs.unlink(`uploads/${req.files.file[0].filename}`, (err) => {
       if (err) console.log(err);
