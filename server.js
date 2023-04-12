@@ -360,7 +360,7 @@ app.post("/courses", (req, res) => {
     [req.body.specialization],
     function (err, results, fields) {
       if (err) throw err;
-      res.send(results);
+      res.send(results.rows);
     }
   );
 });
