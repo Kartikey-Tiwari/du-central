@@ -155,7 +155,7 @@ function fetchDocuments() {
     .then((data) => {
       numLoaded += data[0].length;
 
-      if (numLoaded !== data[1].count) {
+      if (numLoaded !== +data[1].count) {
         if (!main.contains(btn)) main.append(btn);
         btn.style.display = "block";
       } else {

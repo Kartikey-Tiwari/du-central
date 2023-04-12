@@ -1,6 +1,8 @@
 const fs = require("fs");
+const mime = require("mime-types");
 const { google } = require("googleapis");
 const bodyParser = require("body-parser");
+const credentials = require("./credentials.json");
 const { Client } = require("pg");
 const scopes = ["https://www.googleapis.com/auth/drive"];
 
@@ -9,6 +11,9 @@ const con = new Client({
   user: process.env.username,
   password: process.env.password,
   database: process.env.database,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
 con.connect(function (err) {
@@ -17,46 +22,13 @@ con.connect(function (err) {
 });
 
 const auth = new google.auth.JWT(
-  process.env.client_email,
+  credentials.client_email,
   null,
-  process.env.private_key,
+  credentials.private_key,
   scopes
 );
 
 const drive = google.drive({ version: "v3", auth });
-
-async function searchFiles() {
-  let res = await drive.files.list({
-    q: "mimeType='application/pdf'",
-    fields: "files(id)",
-  });
-  res.data.files.forEach(function (file) {
-    console.log(file);
-    // deleteFile(file.id);
-  });
-  return [res.data.files, res.data.nextPageToken];
-}
-
-// (async function () {
-//   let res = await drive.files.list({
-//     pageSize: 5,
-//     fields: "files(name, webViewLink)",
-//     orderBy: "createdTime desc",
-//   });
-//   console.log(res.data);
-// })();
-
-// drive.files.list({}, (err, res) => {
-//   if (err) throw err;
-//   const files = res.data.files;
-//   if (files.length) {
-//     files.map((file) => {
-//       console.log(file);
-//     });
-//   } else {
-//     console.log("No files found");
-//   }
-// });
 
 async function changePermission(fileId) {
   const permission = {
@@ -78,11 +50,11 @@ async function uploadBasic(fileName) {
     name: fileName,
     fields: "id",
   };
+  const media = {
+    mimeType: mime.lookup(fileName),
+    body: fs.createReadStream(`uploads/${fileName}`),
+  };
   try {
-    const media = {
-      mimeType: "application/pdf",
-      body: fs.createReadStream(`uploads/${fileName}`),
-    };
     const file = await drive.files.create({
       requestBody,
       media,
@@ -94,34 +66,8 @@ async function uploadBasic(fileName) {
   }
 }
 
-async function deleteFile(fileId) {
-  try {
-    const file = await drive.files.delete({
-      fileId,
-    });
-    console.log("deleted: ", fileId);
-    return file.data.id;
-  } catch (err) {
-    console.log("error: ", err);
-  }
-}
-
-async function exportPdf(fileId) {
-  try {
-    const result = await drive.files.export({
-      fileId,
-      mimeType: "application/pdf",
-    });
-    console.log(result);
-    return result;
-  } catch (err) {
-    console.log("error: ", err);
-  }
-}
-
 const express = require("express");
 const multer = require("multer");
-const path = require("path");
 const app = express();
 
 app.use(bodyParser.json());
@@ -228,7 +174,7 @@ app.post("/semesterCourses", (req, res) => {
   const specialization = req.body.specialization;
   const semester = req.body.semester;
   con.query(
-    "SELECT `name`,`id` FROM `course` WHERE `spec_id`=$1 and semester=$2",
+    'SELECT "name","id" FROM "course" WHERE "spec_id"=$1 and semester=$2',
     [specialization, semester],
     (err, result) => {
       if (err) throw err;
@@ -246,12 +192,12 @@ app.post("/getDocuments", (req, res) => {
   new Promise((res, rej) => {
     con.query(
       'SELECT *,(SELECT "name" from "course" where "id"="course") as "course_name", (select uni from unidegree where id=(select degree_id from specialization where id=(select spec_id from course where id=course))) as uni, (select concat((select degree from unidegree where id = (select degree_id from specialization where id=(select spec_id from course where id=course))),\' \' ,(select specialization from specialization where id=(select spec_id from course where id=course)))) as degree from "material" WHERE "course"=$1' +
-        `${type !== "" ? ` and type="${type}"` : ""}` +
+        `${type !== "" ? ` and type='${type}'` : ""}` +
         ` limit ${num} offset ${offset}`,
       [courseid],
       function (err, result, fields) {
         if (err) throw err;
-        res(result);
+        res(result.rows);
       }
     );
   }).then((result) => {
@@ -262,8 +208,8 @@ app.post("/getDocuments", (req, res) => {
       [courseid],
       function (err, result, fields) {
         if (err) throw err;
-        response.push(result[0]);
-        res.send(response.rows);
+        response.push(result.rows[0]);
+        res.send(response);
       }
     );
   });
@@ -285,17 +231,18 @@ app.post(
   ]),
   async function (req, res) {
     // Process the uploaded file here
+    res.send(`{"id": null}`);
     const id = await uploadBasic(req.files.file[0].filename);
-    // fs.unlink(`uploads/${req.files.file[0].filename}`, (err) => {
-    //   if (err) console.log(err);
-    // });
+    fs.unlink(`uploads/${req.files.file[0].filename}`, (err) => {
+      if (err) console.log(err);
+    });
     if (id === null) {
-      res.send(`{"id": "null"}`);
+      res.send(`{"id": null}`);
       return;
     }
     let date = new Date().toISOString().slice(0, 19).replace("T", " ");
     con.query(
-      'INSERT INTO "material" values (?,?,?,?,?,?,?,?,?)',
+      'INSERT INTO "material" values ($1,$2,$3,$4,$5,$6,$7,$8,$9)',
       [
         id,
         req.body.name,
@@ -308,7 +255,7 @@ app.post(
         req.body.email,
       ],
       function (err, results, fields) {
-        if (err) throw err;
+        if (err) res.send(`{"id": null}`);
       }
     );
 

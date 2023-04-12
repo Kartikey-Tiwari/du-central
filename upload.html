@@ -34,7 +34,6 @@
             <li><a href="/dashboard">Dashboard</a></li>
             <li><a href="/upload">Upload</a></li>
             <li><a href="/about">About Us</a></li>
-            <li><a href="/contact">Contact</a></li>
           </ul>
         </nav>
       </div>
@@ -90,7 +89,7 @@
       >
         <div class="input-text-container">
           <span class="err" data-msg="Please enter topic name"></span>
-          <input type="text" name="name" id="name" required />
+          <input type="text" name="name" id="name" required maxlength="50" />
           <label for="name">Topic Name</label>
         </div>
 
@@ -143,18 +142,24 @@
         <input
           name="file"
           type="file"
-          accept=".pdf, application/pdf"
+          accept=".pdf, application/pdf, .ppt, application/vnd.ms-powerpoint, .pptx, application/vnd.openxmlformats-officedocument.presentationml.presentation"
           required
         />
         <span class="err" data-msg="Please select a file"></span>
         <div class="input-text-container">
           <span class="err" data-msg="Please enter name"></span>
-          <input name="contributor" type="text" id="contributor" required />
+          <input
+            name="contributor"
+            type="text"
+            id="contributor"
+            required
+            maxlength="30"
+          />
           <label for="contributor">Full Name</label>
         </div>
         <div class="input-text-container">
           <span class="err" data-msg="Please enter email"></span>
-          <input name="email" type="email" required id="email" />
+          <input name="email" type="email" required id="email" maxlength="50" />
           <label for="email">Email</label>
         </div>
         <select name="university">

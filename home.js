@@ -10,6 +10,15 @@ function createLis(data) {
     file.href = `https://drive.google.com/uc?export=media&id=${course.id}`;
     file.target = "_blank";
     file.textContent = course.name;
+    file.addEventListener("click", () => {
+      fetch("/updateViews", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: course.id }),
+      }).then(() => {});
+    });
     li.append(file);
 
     const courseLink = document.createElement("a");
